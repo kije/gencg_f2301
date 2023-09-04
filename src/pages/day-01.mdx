@@ -33,8 +33,9 @@ So I came up with the following rules to generate the drawings:
 
 import SproutsVariations from "@/assets/day1/sprouts_variation.png";
 
-<Image src={SproutsVariations} />
-
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <Image src={SproutsVariations} />
+</div>
 ## First P5.js experiment: Draw some simple shapes
 
 todo describe setup react & p5
@@ -43,7 +44,9 @@ Since I haven't used p5.js before, I decided to start with the [exercise on draw
 
 import { P5Tree } from "@/components/day1/P5Tree";
 
-<P5Tree />
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <P5Tree />
+</div>
 
 The code for this is pretty straightforward. I've added some [logic](https://stackoverflow.com/a/5529199) to place the dots on the round tree at random positions inside the ellipse:
 
