@@ -1,6 +1,4 @@
-import Image from "next/image";
-
-# Day 1
+# Day 1 – Intro
 
 ## Setup journal page with Next.js
 
@@ -17,7 +15,7 @@ So I decided to quickly configure my own static site generation with [Next.js](h
 
 I liked the idea of the [Sprouts game](https://digitalideation.github.io/gencg_f2301/notes/day01/#john-h-conway--michael-s-patterson-sprouts-30-mns).
 
-However, when I started to read the instruction for it, I immediately started to wonder what would happen if one would create an even more restricted, and in some sense more repetitive version of the game.
+However, when I read the instructions for it, I immediately started to wonder what would happen if one would create an even more restricted, and in some sense more repetitive version of the game.
 In particular, I wanted to restrict the shapes allowed in the game. My idea was to only allow two kinds of shapes: curved lines and $n$-sided shapes with only straight lines.
 
 So I came up with the following rules to generate the drawings:
@@ -32,6 +30,7 @@ So I came up with the following rules to generate the drawings:
 <br />
 
 import SproutsVariations from "@/assets/day1/sprouts_variation.png";
+import Image from "next/image";
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   <Image src={SproutsVariations} />
