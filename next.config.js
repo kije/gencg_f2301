@@ -2,9 +2,9 @@
 const isProd = process.env.NODE_ENV === "production";
 
 const nextConfig = {
-  output: 'export',
+  output: "export",
   reactStrictMode: true,
-  pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
+  pageExtensions: ["mdx", "md", "jsx", "js", "tsx", "ts"],
   basePath: "/gencg_f2301",
   assetPrefix: isProd ? "/gencg_f2301/" : "",
   images: {
@@ -12,11 +12,10 @@ const nextConfig = {
   },
 };
 
-const withNextra = require('nextra')({
-  theme: 'nextra-theme-docs',
-  themeConfig: './theme.config.tsx',
+const withNextra = require("nextra")({
+  theme: "nextra-theme-docs",
+  themeConfig: "./theme.config.tsx",
   latex: true,
-
 });
 
-module.exports = (withNextra(nextConfig));
+module.exports = withNextra(nextConfig);

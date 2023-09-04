@@ -1,10 +1,27 @@
+import Image from "next/image";
+
 # Day 1
 
-## Variation on Sprouts
-I liked the idea of the Sprouts game. However when I started to read the instruction for it, I immediately started to wonder what would happen if one would create an even more restricted and in some sense more repetitive version of the game.
-In particular I wanted to restrict the shapes allowed in the game. My idea was to only allow two kinds of shapes: curved lines and $n$-sided shapes with only straight lines.
+## Setup journal page with Next.js
 
-So I came up with the following rules to generate the darwings:
+Right from the start, it became clear to me that I'll need to have some more flexibility with the journal page than the existing Github Pages generated via [Jekyll](https://jekyllrb.com/) would give me.
+
+For one, I plan to do some of the work/experiments in [Rust](https://www.rust-lang.org/) using [nannou](https://nannou.cc/).
+Since Rust can be compiled to [WebAssembly](https://webassembly.org/) and run in the browser, it seemed like a good idea to have a setup that would allow me to integrate this directly into the journal page.
+
+At the same time, this would also allow me to integrate [p5.js](https://p5js.org/) experiments as well.
+
+So I decided to quickly configure my own static site generation with [Next.js](https://nextjs.org/) for the journal page.
+
+## Variation on Sprouts
+
+I liked the idea of the [Sprouts game](https://digitalideation.github.io/gencg_f2301/notes/day01/#john-h-conway--michael-s-patterson-sprouts-30-mns).
+
+However, when I started to read the instruction for it, I immediately started to wonder what would happen if one would create an even more restricted, and in some sense more repetitive version of the game.
+In particular, I wanted to restrict the shapes allowed in the game. My idea was to only allow two kinds of shapes: curved lines and $n$-sided shapes with only straight lines.
+
+So I came up with the following rules to generate the drawings:
+
 1. Decide on a number $n > 2$ . This will represent the number of sides of all shapes in the drawing with only straight lines
 2. Draw $n$ points
 3. Connect each of this newly drawn points to one other of the points.
@@ -12,5 +29,67 @@ So I came up with the following rules to generate the darwings:
 5. Now draw $n - 1$ new points
 6. repeat at step 3. Consider the endpoint of the recently drawn curved line as a new point
 
+<br />
 
+import SproutsVariations from "@/assets/day1/sprouts_variation.png";
 
+<Image src={SproutsVariations} />
+
+## First P5.js experiment: Draw some simple shapes
+
+todo describe setup react & p5
+
+Since I haven't used p5.js before, I decided to start with the [exercise on drawing some simple shapes](https://digitalideation.github.io/gencg_f2301/notes/day01/#2-draw-then-code) with p5.js:
+
+import { P5Tree } from "@/components/day1/P5Tree";
+
+<P5Tree />
+
+The code for this is pretty straightforward. I've added some [logic](https://stackoverflow.com/a/5529199) to place the dots on the round tree at random positions inside the ellipse:
+
+```js
+function randomPointInEllipse(cx, cy, width, height) {
+  // algo by: https://stackoverflow.com/a/5529199
+  let rho = Math.random();
+  let phi = Math.random() * 2 * Math.PI;
+
+  // random coordinates inside the circle
+  let x = Math.sqrt(rho) * Math.cos(phi);
+  let y = Math.sqrt(rho) * Math.sin(phi);
+
+  // scale to elipse
+  x = (x * width) / 2.0;
+  y = (y * height) / 2.0;
+
+  return [cx + x, cy + y];
+}
+
+function drawRoundTree() {
+  const cx = 100;
+  const cy = 150;
+  const width = 90;
+  const height = 100;
+
+  background(255, 0);
+  clear();
+
+  stroke(255, 255, 255);
+  strokeWeight(4);
+  noFill();
+
+  // crown
+  ellipse(cx, cy, width, height);
+  // main trunk
+  line(cx, cy - 15, cx, cy + 110);
+  // side branch
+  line(cx - 20, cy + 5, cx, cy + 35);
+
+  // leaves
+  for (let i = 0; i <= 50; i++) {
+    const [x, y] = randomPointInEllipse(cx, cy, width, height);
+
+    strokeWeight(Math.random() * 4);
+    point(x, y);
+  }
+}
+```
