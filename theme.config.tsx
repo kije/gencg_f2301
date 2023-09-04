@@ -11,7 +11,7 @@ const config: DocsThemeConfig = {
   project: {
     link: "https://github.com/kije/gencg_f2301",
   },
-  docsRepositoryBase: "https://github.com/kije/gencg_f2301",
+  docsRepositoryBase: "https://github.com/kije/gencg_f2301/tree/journal",
   footer: {
     text: "HSLU - Generative Computer Graphics - Fall 2023",
   },
