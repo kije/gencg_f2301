@@ -1,0 +1,16 @@
+# Day 1
+
+## Variation on Sprouts
+I liked the idea of the Sprouts game. However when I started to read the instruction for it, I immediately started to wonder what would happen if one would create an even more restricted and in some sense more repetitive version of the game.
+In particular I wanted to restrict the shapes allowed in the game. My idea was to only allow two kinds of shapes: curved lines and $n$-sided shapes with only straight lines.
+
+So I came up with the following rules to generate the darwings:
+1. Decide on a number $n > 2$ . This will represent the number of sides of all shapes in the drawing with only straight lines
+2. Draw $n$ points
+3. Connect each of this newly drawn points to one other of the points.
+4. Connect two of these points with a curved line, without crossing any other line already drawn in the drawing (it's ok though to start/end in a point that either joins two straight-lined shapes or even is the start/end of another curved line)
+5. Now draw $n - 1$ new points
+6. repeat at step 3. Consider the endpoint of the recently drawn curved line as a new point
+
+
+
