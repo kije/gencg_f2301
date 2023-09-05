@@ -1,4 +1,11 @@
-import { Grid1, Grid2, Grid3, Grid4 } from "@/components/day2/Grids";
+import {
+  Grid1,
+  Grid2,
+  Grid3,
+  Grid3Interesting,
+  Grid4,
+} from "@/components/day2/Grids";
+import { PAGE_CONTENT_WIDTH } from "@/utils/consts";
 
 # Day 2 – Grids & Iterative Patterns
 
@@ -31,22 +38,51 @@ function draw() {
 }
 ```
 
-<Grid1 numTilesX={10} numTilesY={7} />
+After that, I tried to do a simple rotation and some animation of the otation
 
 <br />
 
-After that, I tried to do a simple rotation
+<div
+  style={{
+    display: "flex",
+    flex: "0 0 " + (PAGE_CONTENT_WIDTH / 3 - 15) + "px",
+    alignContent: "space-around",
+  }}
+>
+  <Grid1
+    numTilesX={10}
+    numTilesY={7}
+    contentWidth={PAGE_CONTENT_WIDTH / 3 - 15}
+  />
+  <Grid2
+    numTilesX={10}
+    numTilesY={7}
+    contentWidth={PAGE_CONTENT_WIDTH / 3 - 15}
+  />
+  <Grid3
+    numTilesX={10}
+    numTilesY={7}
+    contentWidth={PAGE_CONTENT_WIDTH / 3 - 15}
+  />
+</div>
 
-<Grid2 numTilesX={10} numTilesY={7} />
+### Waves of rotation
+
+An interesting effect appeared when I started to offset the initial rotation of each box based on their `x` and `y` position and also offsetting the ration anchor within the box away from the center.
+Tuned just right, this creates the impression of a wave-like motion, even though all the boxes are just rotating.
+
+<Grid3Interesting numTilesX={10} numTilesY={7} margin={20} />
 
 <br />
 
-<Grid3 numTilesX={10} numTilesY={7} />
+### Entropy Mosaic
+
+Playing around with the rotation-rate based on the `x` and `y` position of the box resulted in a – I thin – mesmerizing effect.
+
+The boxes slowly get more and more chaotic, creating interesting patterns along the way, until they are completely random. However, after some time, patters start emerging again, until the boxes are back in their original state (this takes a very long time tough).
+
+This reminded me of the concept of entropy from physics, which is the measure of disorder in a system. The entropy of the boxes is at its lowest when they are in their original state, and at its highest when they are completely random.
 
 <br />
 
-<Grid3 numTilesX={10} numTilesY={7} margin={20} />
-
-<br />
-
-<Grid4 numTilesX={10} numTilesY={7} />
+<Grid4 numTilesX={20} numTilesY={16} margin={5} />
