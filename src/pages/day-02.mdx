@@ -1,0 +1,52 @@
+import { Grid1, Grid2, Grid3, Grid4 } from "@/components/day2/Grids";
+
+# Day 2 – Grids & Iterative Patterns
+
+## Grid
+
+I started by creating an grid of simple boxes. In addition, I wanted to have a flexibale and easy to play around with grid layout system, so I invested some time in making it easy to change the number of tiles in x and y direction, as well as the margin between the tiles.
+
+```js
+const NUM_TILES_X = 10;
+const NUM_TILES_Y = 7;
+const TILE_MARGIN = 2;
+
+const TILE_SIZE = PAGE_CONTENT_WIDTH / NUM_TILES_X - 2 * TILE_MARGIN;
+const TILE_SIZE_WITH_MARGIN = TILE_SIZE + 2 * TILE_MARGIN;
+
+function draw() {
+  clear();
+  stroke(255, 255, 255);
+  strokeWeight(1);
+  noFill();
+
+  for (let x = 0; x < NUM_TILES_X; x++) {
+    for (let y = 0; y < NUM_TILES_Y; y++) {
+      const x0 = TILE_MARGIN + x * TILE_SIZE_WITH_MARGIN;
+      const y0 = TILE_MARGIN + y * TILE_SIZE_WITH_MARGIN;
+
+      rect(x0, y0, TILE_SIZE, TILE_SIZE);
+    }
+  }
+}
+```
+
+<Grid1 numTilesX={10} numTilesY={7} />
+
+<br />
+
+After that, I tried to do a simple rotation
+
+<Grid2 numTilesX={10} numTilesY={7} />
+
+<br />
+
+<Grid3 numTilesX={10} numTilesY={7} />
+
+<br />
+
+<Grid3 numTilesX={10} numTilesY={7} margin={20} />
+
+<br />
+
+<Grid4 numTilesX={10} numTilesY={7} />
