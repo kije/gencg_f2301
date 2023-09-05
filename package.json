@@ -16,6 +16,7 @@
     "autoprefixer": "10.4.15",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
+    "gl-matrix": "^3.4.3",
     "lodash": "^4.17.21",
     "next": "13.4.19",
     "nextra": "^2.12.3",
@@ -26,6 +27,7 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
+    "@types/gl-matrix": "^3.2.0",
     "@types/lodash": "^4.14.197",
     "prettier": "^3.0.3"
   }

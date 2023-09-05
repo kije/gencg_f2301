@@ -5,6 +5,8 @@ import {
   Grid3Interesting,
   Grid4,
 } from "@/components/day2/Grids";
+import { NestedBox } from "@/components/day2/NestedBox";
+import { GridsWithNextedBoxes } from "@/components/day2/GridsWithNextedBoxes";
 import { PAGE_CONTENT_WIDTH } from "@/utils/consts";
 
 # Day 2 – Grids & Iterative Patterns
@@ -66,6 +68,8 @@ After that, I tried to do a simple rotation and some animation of the otation
   />
 </div>
 
+[//]: # "todo: describe roation was a pain"
+
 ### Waves of rotation
 
 An interesting effect appeared when I started to offset the initial rotation of each box based on their `x` and `y` position and also offsetting the ration anchor within the box away from the center.
@@ -86,3 +90,82 @@ This reminded me of the concept of entropy from physics, which is the measure of
 <br />
 
 <Grid4 numTilesX={20} numTilesY={16} margin={5} />
+
+## Nested boxes
+
+<NestedBox />
+
+```typescript
+interface Point {
+  x: number;
+  y: number;
+}
+
+type Box = [Point, Point, Point, Point];
+
+function getOuterBox(size: number): Box {
+  return [
+    { x: 0, y: 0 },
+    { x: size, y: 0 },
+    { x: size, y: size },
+    { x: 0, y: size },
+  ];
+}
+
+function getNestedBox(outer: Box): Box {
+  const [p1, p2, p3, p4] = outer;
+
+  return [
+    getMidPoint(p1, p2),
+    getMidPoint(p2, p3),
+    getMidPoint(p3, p4),
+    getMidPoint(p4, p1),
+  ];
+}
+
+function getMidPoint(p1: Point, p2: Point): Point {
+  const v1 = vec2.fromValues(p1.x, p1.y);
+  const v2 = vec2.fromValues(p2.x, p2.y);
+
+  const res = vec2.create();
+
+  // v1 + ((v2 - v1) / 2)
+  vec2.subtract(res, v2, v1);
+  vec2.scale(res, res, 0.5);
+  vec2.add(res, res, v1);
+
+  return { x: res[0], y: res[1] };
+}
+
+// p5js draw
+function draw() {
+  clear();
+  stroke(255, 255, 255);
+  strokeWeight(1);
+  noFill();
+
+  const outerBox = getOuterBox(180);
+
+  const boxes: Box[] = [outerBox];
+
+  for (let i = 1; i < 10; i++) {
+    const lastBox = boxes[i - 1]!;
+    boxes.push(getNestedBox(lastBox));
+  }
+
+  for (const box of boxes) {
+    quad(
+      box[0].x,
+      box[0].y,
+      box[1].x,
+      box[1].y,
+      box[2].x,
+      box[2].y,
+      box[3].x,
+      box[3].y,
+    );
+  }
+}
+```
+
+<GridsWithNextedBoxes numTilesX={15} numTilesY={15} margin={15} />
