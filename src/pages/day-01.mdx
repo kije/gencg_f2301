@@ -2,14 +2,9 @@
 
 ## Setup journal page with Next.js
 
-Right from the start, it became clear to me that I'll need to have some more flexibility with the journal page than the existing Github Pages generated via [Jekyll](https://jekyllrb.com/) would give me.
+Right from the start, it became clear to me that want to have something more flexible than the existing Github Pages generated via [Jekyll](https://jekyllrb.com/) would give me for the journal.
 
-For one, I plan to do some of the work/experiments in [Rust](https://www.rust-lang.org/) using [nannou](https://nannou.cc/).
-Since Rust can be compiled to [WebAssembly](https://webassembly.org/) and run in the browser, it seemed like a good idea to have a setup that would allow me to integrate this directly into the journal page.
-
-At the same time, this would also allow me to integrate [p5.js](https://p5js.org/) experiments as well.
-
-So I decided to quickly configure my own static site generation with [Next.js](https://nextjs.org/) for the journal page.
+So I decided to quickly configure my own static site generation with [Next.js](https://nextjs.org/) for the journal page, which allows for easy integration of [p5.js](https://p5js.org/) experiments as well.
 
 ## Variation on Sprouts
 
@@ -95,3 +90,23 @@ function drawRoundTree() {
   }
 }
 ```
+
+## EatTheCanvas
+
+While trying to create an interactive version of the Sollewit wall drawing, I got inspired by a little "accident", which created a pattern that seemed to "eat" the canvas:
+
+<br />
+
+import { EatTheCanvas } from "@/components/day1/EatTheCanvas";
+
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <EatTheCanvas />
+</div>
+
+## Sollewit
+
+import { Sollewit } from "@/components/day1/Sollewit";
+
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <Sollewit />
+</div>
