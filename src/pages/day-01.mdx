@@ -24,7 +24,7 @@ So I came up with the following rules to generate the drawings:
 5. Now draw $n - 1$ new points
 6. repeat at step 3. Consider the endpoint of the recently drawn curved line as a new point
 
-_todo: thoughts on Computing without computers (short analysis & take away from the games)_
+[//]: # "todo: thoughts on Computing without computers (short analysis & take away from the games)"
 
 <br />
 
@@ -39,15 +39,13 @@ import Image from "next/image";
 
 ### First P5.js experiment: Draw some simple shapes
 
-_todo describe setup react & p5_
+[//]: # "todo describe setup react & p5"
 
 Since I haven't used p5.js before, I decided to start with the [exercise on drawing some simple shapes](https://digitalideation.github.io/gencg_f2301/notes/day01/#2-draw-then-code) with p5.js:
 
 import { P5Tree } from "@/components/day1/P5Tree";
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-  <P5Tree />
-</div>
+<P5Tree />
 
 The code for this is pretty straightforward. I've added some [logic](https://stackoverflow.com/a/5529199) to place the dots on the round tree at random positions inside the ellipse:
 
@@ -74,7 +72,6 @@ function drawRoundTree() {
   const width = 90;
   const height = 100;
 
-  background(255, 0);
   clear();
 
   stroke(255, 255, 255);
@@ -106,14 +103,10 @@ While trying to create an interactive version of the Sollewit wall drawing, I go
 
 import { EatTheCanvas } from "@/components/day1/EatTheCanvas";
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-  <EatTheCanvas />
-</div>
+<EatTheCanvas />
 
 ### Sollewit
 
 import { Sollewit } from "@/components/day1/Sollewit";
 
-<div style={{ display: "flex", justifyContent: "center" }}>
-  <Sollewit />
-</div>
+<Sollewit />

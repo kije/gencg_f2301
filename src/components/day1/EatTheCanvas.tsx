@@ -1,25 +1,20 @@
+import { ResponsiveSketch } from "@/components/ResponsiveSketch";
+import { PAGE_CONTENT_WIDTH } from "@/utils/consts";
 import { forEach, range, map, clamp } from "lodash";
 import { FC, useCallback, useMemo, useRef, useState } from "react";
 import { SketchProps } from "react-p5";
 
-import dynamic from "next/dynamic";
-
-// Will only import `react-p5` on client-side
-const Sketch = dynamic(() => import("react-p5").then((mod) => mod.default), {
-  ssr: false,
-});
-
 const setup: SketchProps["setup"] = (p5, canvasParentRef) => {
   // use parent to render the canvas in this ref
   // (without that p5 will render the canvas outside of your component)
-  p5.createCanvas(800, 600).parent(canvasParentRef);
+  p5.createCanvas(PAGE_CONTENT_WIDTH, 600).parent(canvasParentRef);
 };
 
 export const EatTheCanvas: FC = () => {
   const initialPoints = useMemo(
     () =>
       range(0, 45).map(() => ({
-        x: Math.random() * 800,
+        x: Math.random() * PAGE_CONTENT_WIDTH,
         y: Math.random() * 600,
       })),
     [],
@@ -45,5 +40,5 @@ export const EatTheCanvas: FC = () => {
     }));
   }, []);
 
-  return <Sketch setup={setup} draw={draw} />;
+  return <ResponsiveSketch setup={setup} draw={draw} />;
 };

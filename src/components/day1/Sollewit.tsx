@@ -1,25 +1,22 @@
+import { ResponsiveSketch } from "@/components/ResponsiveSketch";
+import { PAGE_CONTENT_WIDTH } from "@/utils/consts";
 import { forEach, range, map, clamp } from "lodash";
 import { FC, useCallback, useMemo, useRef, useState } from "react";
 import { SketchProps } from "react-p5";
 
-import dynamic from "next/dynamic";
-
-// Will only import `react-p5` on client-side
-const Sketch = dynamic(() => import("react-p5").then((mod) => mod.default), {
-  ssr: false,
-});
+import { Sketch } from "@/utils/dynamic-sketch";
 
 const setup: SketchProps["setup"] = (p5, canvasParentRef) => {
   // use parent to render the canvas in this ref
   // (without that p5 will render the canvas outside of your component)
-  p5.createCanvas(900, 768).parent(canvasParentRef);
+  p5.createCanvas(PAGE_CONTENT_WIDTH, 700).parent(canvasParentRef);
 };
 
 export const Sollewit: FC = () => {
   const initialPoints = useMemo(
     () =>
       range(0, 22).map(() => ({
-        x: Math.random() * 900,
+        x: Math.random() * PAGE_CONTENT_WIDTH,
         y: Math.random() * 700,
       })),
     [],
@@ -28,7 +25,6 @@ export const Sollewit: FC = () => {
   const points = useRef(initialPoints);
 
   const draw = useCallback<NonNullable<SketchProps["draw"]>>((p5) => {
-    p5.background(255, 0);
     p5.clear();
     p5.stroke(255, 255, 255);
     p5.strokeWeight(7);
@@ -50,10 +46,10 @@ export const Sollewit: FC = () => {
     });
 
     points.current = map(points.current, (point) => ({
-      x: clamp(point.x + Math.random() * 5 - 2.5, 10, 890),
+      x: clamp(point.x + Math.random() * 5 - 2.5, 10, PAGE_CONTENT_WIDTH - 10),
       y: clamp(point.y + Math.random() * 5 - 2.5, 10, 690),
     }));
   }, []);
 
-  return <Sketch setup={setup} draw={draw} />;
+  return <ResponsiveSketch setup={setup} draw={draw} />;
 };

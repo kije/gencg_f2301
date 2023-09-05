@@ -1,14 +1,8 @@
+import { ResponsiveSketch } from "@/components/ResponsiveSketch";
 import { range } from "lodash";
 import P5 from "p5";
-import { FC, useCallback, useRef, useState } from "react";
+import { FC, useCallback, useRef } from "react";
 import { SketchProps } from "react-p5";
-
-import dynamic from "next/dynamic";
-
-// Will only import `react-p5` on client-side
-const Sketch = dynamic(() => import("react-p5").then((mod) => mod.default), {
-  ssr: false,
-});
 
 type Steps = 0 | 1 | 2 | 3 | 4;
 
@@ -20,7 +14,6 @@ const setup: SketchProps["setup"] = (p5, canvasParentRef) => {
 };
 
 const drawTrees = (p5: P5, step: Steps) => {
-  p5.background(255, 0);
   p5.clear();
   p5.describe("Two trees generated out of simple shapes");
 
@@ -104,5 +97,5 @@ export const P5Tree: FC = () => {
     step.current = ((step.current + 1) % 5) as Steps;
   }, []);
 
-  return <Sketch setup={setup} draw={draw} />;
+  return <ResponsiveSketch setup={setup} draw={draw} />;
 };
