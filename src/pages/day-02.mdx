@@ -6,10 +6,19 @@ import {
   Grid4,
 } from "@/components/day2/Grids";
 import { NestedBox } from "@/components/day2/NestedBox";
-import { GridsWithNextedBoxes } from "@/components/day2/GridsWithNextedBoxes";
+import {
+  GridsWithNextedBoxes,
+  GridsWithNextedBoxesRotating,
+  GridsWithNextedBoxesInteresting,
+  GridsWithNextedBoxesInteresting2,
+  GridsWithNextedBoxesRotating2,
+  GridsWithNextedBoxesWithFlash,
+} from "@/components/day2/GridsWithNextedBoxes";
 import { PAGE_CONTENT_WIDTH } from "@/utils/consts";
 
 # Day 2 – Grids & Iterative Patterns
+
+[//] # "todo add drawing & description of initial idea (nested boxes)"
 
 ## Grid
 
@@ -68,7 +77,7 @@ After that, I tried to do a simple rotation and some animation of the otation
   />
 </div>
 
-[//]: # "todo: describe roation was a pain"
+[//] # "todo: describe roation was a pain"
 
 ### Waves of rotation
 
@@ -81,9 +90,9 @@ Tuned just right, this creates the impression of a wave-like motion, even though
 
 ### Entropy Mosaic
 
-Playing around with the rotation-rate based on the `x` and `y` position of the box resulted in a – I thin – mesmerizing effect.
+Playing around with the rotation-rate based on the `x` and `y` position of the box resulted in a – I think – cool pattern.
 
-The boxes slowly get more and more chaotic, creating interesting patterns along the way, until they are completely random. However, after some time, patters start emerging again, until the boxes are back in their original state (this takes a very long time tough).
+The boxes slowly get more and more chaotic, creating interesting patterns along the way, until they are completely random. However, after some time, new patters start emerging again, until the boxes are back in their original state (this takes a very long time tough).
 
 This reminded me of the concept of entropy from physics, which is the measure of disorder in a system. The entropy of the boxes is at its lowest when they are in their original state, and at its highest when they are completely random.
 
@@ -168,4 +177,22 @@ function draw() {
 }
 ```
 
-<GridsWithNextedBoxes numTilesX={15} numTilesY={15} margin={15} />
+<br />
+<GridsWithNextedBoxes numTilesX={15} numTilesY={15} margin={8} />
+
+<br />
+
+<GridsWithNextedBoxesWithFlash numTilesX={15} numTilesY={15} margin={15} />
+
+<br />
+
+<GridsWithNextedBoxesRotating2 numTilesX={15} numTilesY={15} margin={15} />
+<br />
+
+<GridsWithNextedBoxesRotating numTilesX={15} numTilesY={15} margin={15} />
+
+[//]: # "todo explore otehr grids"
+
+## Fazit des Tages
+
+Den heutige Tag fand ich persönlich extrem spannend! Allerdings habe ich mich etwas rumexperimentieren verloren, anstatt meine ursprüngliche Idee zu verfolgen.
