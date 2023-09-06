@@ -1,6 +1,8 @@
+import { ClockStep1 } from "@/components/day3/Clock";
+
 # Day 3 – Clock
 
-<br />
+## The idea
 
 import ClockIdeaSketch from "@/assets/day3/clock_sketch.jpg";
 import Image from "next/image";
@@ -8,3 +10,11 @@ import Image from "next/image";
 <div style={{ display: "flex", justifyContent: "center" }}>
   <Image src={ClockIdeaSketch} />
 </div>
+
+## Building the clock
+
+### First step: darwing dots & make the clock tick
+
+Let's start simple by making a line of dots and make the clock "tick" by moving the dots that represent the passed seconds "one spot" to the right.
+
+<ClockStep1 />
