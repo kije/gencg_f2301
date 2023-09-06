@@ -28,6 +28,7 @@ export const ClockStep1: FC = () => {
 
     const now = new Date();
     const seconds = now.getSeconds();
+    const millis = now.getMilliseconds();
 
     const secondsJustChanged = seconds !== previousSecond.current;
 
@@ -39,7 +40,15 @@ export const ClockStep1: FC = () => {
       let offset = (INNER_TICK_SIZE + INNER_TICK_MARGIN) * offsetIndex;
 
       if (innerTicksPassed >= i) {
-        offset -= INNER_TICK_SIZE + INNER_TICK_MARGIN;
+        if (innerTicksPassed === i && secondsJustChanged) {
+          offset -= p5.lerp(
+            0,
+            INNER_TICK_SIZE + INNER_TICK_MARGIN,
+            millis / 1000,
+          );
+        } else {
+          offset -= INNER_TICK_SIZE + INNER_TICK_MARGIN;
+        }
       }
 
       p5.point(CENTER - offset, CENTER / 4);
