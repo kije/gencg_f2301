@@ -52,6 +52,7 @@ export const Grid1: FC<GridProps> = ({
       numTilesX,
       numTilesY,
       margin,
+      tileSize,
       tileSizeWithMargin,
     ],
   );

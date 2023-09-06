@@ -4,8 +4,6 @@ import { forEach, range, map, clamp } from "lodash";
 import { FC, useCallback, useMemo, useRef, useState } from "react";
 import { SketchProps } from "react-p5";
 
-import { Sketch } from "@/utils/dynamic-sketch";
-
 const setup: SketchProps["setup"] = (p5, canvasParentRef) => {
   // use parent to render the canvas in this ref
   // (without that p5 will render the canvas outside of your component)
