@@ -267,3 +267,71 @@ export const ClockStep3: FC = () => {
 
   return <ResponsiveSketch setup={setup} draw={draw} />;
 };
+
+export const ClockStep4: FC = () => {
+  const INNER_TICK_NUMBER = 25;
+  const INNER_TICK_SIZE = 6;
+  const INNER_TICK_MARGIN = 1;
+
+  const setup = useCallback<SketchProps["setup"]>((p5, canvasParentRef) => {
+    p5.createCanvas(PAGE_CONTENT_WIDTH, PAGE_CONTENT_WIDTH / 2).parent(
+      canvasParentRef,
+    );
+  }, []);
+
+  const circleRadius =
+    ((INNER_TICK_NUMBER + 2) / 4) * (INNER_TICK_SIZE + INNER_TICK_MARGIN);
+
+  const innerCircleTickAngle = (2 * Math.PI) / INNER_TICK_NUMBER;
+
+  const draw = useCallback<NonNullable<SketchProps["draw"]>>((p5) => {
+    p5.clear();
+    p5.stroke(255, 255, 255);
+    p5.strokeWeight(INNER_TICK_SIZE);
+    //p5.noFill();
+
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const millis = now.getMilliseconds();
+
+    const innerTicksPassed = seconds % INNER_TICK_NUMBER;
+
+    const reset = innerTicksPassed === 0 && millis <= 400;
+
+    forEach(range(0, INNER_TICK_NUMBER * 1.5), (i) => {
+      let offsetX = 0;
+      let offsetY = 0;
+
+      if (innerTicksPassed >= i) {
+        const angle = ease(
+          innerCircleTickAngle * i,
+          innerCircleTickAngle * (i + 1),
+          millis / 1000,
+          easing.inOutQuart,
+          p5,
+        );
+        offsetX = p5.cos(angle) * circleRadius;
+        offsetY = p5.sin(angle) * -circleRadius;
+      } else {
+        if (i - innerTicksPassed >= INNER_TICK_NUMBER / 2) {
+          return;
+        }
+        offsetX =
+          (INNER_TICK_SIZE + INNER_TICK_MARGIN) * (innerTicksPassed - i) +
+          circleRadius;
+
+        offsetX += ease(
+          0,
+          INNER_TICK_SIZE + INNER_TICK_MARGIN,
+          millis / 1000,
+          easing.inOutQuart,
+          p5,
+        );
+      }
+
+      p5.point(CENTER + offsetX, CENTER / 2 + offsetY);
+    });
+  }, []);
+
+  return <ResponsiveSketch setup={setup} draw={draw} />;
+};
