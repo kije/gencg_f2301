@@ -204,9 +204,9 @@ export const ClockStep2: FC = () => {
 };
 
 export const ClockStep3: FC = () => {
-  const INNER_TICK_NUMBER = 30;
-  const INNER_TICK_SIZE = 5;
-  const INNER_TICK_MARGIN = 2;
+  const INNER_TICK_NUMBER = 25;
+  const INNER_TICK_SIZE = 6;
+  const INNER_TICK_MARGIN = 1;
 
   const setup = useCallback<SketchProps["setup"]>((p5, canvasParentRef) => {
     p5.createCanvas(PAGE_CONTENT_WIDTH, PAGE_CONTENT_WIDTH / 2).parent(
@@ -215,7 +215,7 @@ export const ClockStep3: FC = () => {
   }, []);
 
   const circleRadius =
-    ((INNER_TICK_NUMBER + 1) / 4) * (INNER_TICK_SIZE + INNER_TICK_MARGIN);
+    ((INNER_TICK_NUMBER + 2) / 4) * (INNER_TICK_SIZE + INNER_TICK_MARGIN);
 
   const innerCircleTickAngle = (2 * Math.PI) / INNER_TICK_NUMBER;
 
@@ -238,9 +238,15 @@ export const ClockStep3: FC = () => {
       let offsetY = 0;
 
       if (innerTicksPassed >= i) {
-        const angle = innerCircleTickAngle * i;
+        const angle = ease(
+          innerCircleTickAngle * i,
+          innerCircleTickAngle * (i + 1),
+          millis / 1000,
+          easing.inOutQuart,
+          p5,
+        );
         offsetX = p5.cos(angle) * circleRadius;
-        offsetY = p5.sin(angle) * circleRadius;
+        offsetY = p5.sin(angle) * -circleRadius;
       } else {
         offsetX =
           (INNER_TICK_SIZE + INNER_TICK_MARGIN) * (innerTicksPassed - i) +
@@ -253,10 +259,6 @@ export const ClockStep3: FC = () => {
           easing.inOutQuart,
           p5,
         );
-      }
-
-      if (innerTicksPassed >= i) {
-      } else {
       }
 
       p5.point(CENTER + offsetX, CENTER / 2 + offsetY);
