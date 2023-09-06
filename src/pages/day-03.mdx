@@ -5,13 +5,14 @@ import {
   ClockStep3,
   ClockStep4,
 } from "@/components/day3/Clock";
+import Image from "next/image";
+import { PAGE_CONTENT_WIDTH } from "@/utils/consts";
 
 # Day 3 – Clock
 
 ## The idea
 
 import ClockIdeaSketch from "@/assets/day3/clock_sketch.jpg";
-import Image from "next/image";
 
 <div style={{ display: "flex", justifyContent: "center" }}>
   <Image src={ClockIdeaSketch} />
@@ -26,6 +27,14 @@ Let's start simple by making a line of dots and make the clock "tick" by moving 
 <ClockStep1 />
 
 ### Second step: going around the corner
+
+<br />
+
+import ClockMovement from "@/assets/day3/clock_movement.jpg";
+
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <Image src={ClockMovement} width={PAGE_CONTENT_WIDTH / 1.5} />
+</div>
 
 <ClockStep2 />
 
