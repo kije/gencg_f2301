@@ -269,7 +269,7 @@ export const ClockStep3: FC = () => {
 };
 
 export const ClockStep4: FC = () => {
-  const INNER_TICK_NUMBER = 25;
+  const INNER_TICK_NUMBER = 30;
   const INNER_TICK_SIZE = 6;
   const INNER_TICK_MARGIN = 1;
 
@@ -282,7 +282,7 @@ export const ClockStep4: FC = () => {
   const circleRadius =
     ((INNER_TICK_NUMBER + 2) / 4) * (INNER_TICK_SIZE + INNER_TICK_MARGIN);
 
-  const innerCircleTickAngle = (2 * Math.PI) / INNER_TICK_NUMBER;
+  const innerCircleTickAngle = (2 * Math.PI) / (INNER_TICK_NUMBER + 1);
 
   const draw = useCallback<NonNullable<SketchProps["draw"]>>((p5) => {
     p5.clear();
