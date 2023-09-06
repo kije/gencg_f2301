@@ -2,9 +2,59 @@
 
 ## Setup journal page with Next.js
 
-Right from the start, it became clear to me that want to have something more flexible than the existing Github Pages generated via [Jekyll](https://jekyllrb.com/) would give me for the journal.
+Right from the start, it became clear to me that I want to have something more flexible than what the existing Github Pages generated via [Jekyll](https://jekyllrb.com/) would give me for the journal.
 
 So I decided to quickly configure my own static site generation with [Next.js](https://nextjs.org/) for the journal page, which allows for easy integration of [p5.js](https://p5js.org/) experiments as well.
+
+[Next.js](https://nextjs.org/) is a static site generator based on [React](https://reactjs.org/). It allows to [easily generate new pages](https://github.com/kije/gencg_f2301/tree/journal/src/pages) written in Markdown or [MDX](https://mdxjs.com/).
+
+Together with [react-p5](https://github.com/Gherciu/react-p5) it allows for seamless integration of p5.js experiments directly into the markdown.
+
+```mdx
+### Fancy experiment (Demo)
+
+This is **regular** `markdown`.
+
+And here my fancy _experiment_:
+
+import { Sketch } from "react-p5";
+
+<Sketch
+  setup={(p5, parent) => {
+    p5.createCanvas(400, 400).parent(parent);
+  }}
+  draw={(p5) => {
+    p5.background(220);
+    p5.fill(150 + 20 * p5.random());
+    p5.circle(200, 200, 100);
+  }}
+/>
+```
+
+which then would render this:
+
+---
+
+### Fancy experiment (Demo)
+
+This is **regular** `markdown`.
+
+And here my fancy _experiment_:
+
+import { Sketch } from "@/utils/dynamic-sketch";
+
+<Sketch
+  setup={(p5, parent) => {
+    p5.createCanvas(400, 400).parent(parent);
+  }}
+  draw={(p5) => {
+    p5.background(220);
+    p5.fill(150 + 20 * p5.random());
+    p5.circle(200, 200, 100);
+  }}
+/>
+
+---
 
 ## Computing without computers
 
@@ -24,7 +74,7 @@ So I came up with the following rules to generate the drawings:
 5. Now draw $n - 1$ new points
 6. repeat at step 3. Consider the endpoint of the recently drawn curved line as a new point
 
-[//]: # "todo: thoughts on Computing without computers (short analysis & take away from the games)"
+[//] # "todo: thoughts on Computing without computers (short analysis & take away from the games)"
 
 <br />
 
@@ -39,7 +89,7 @@ import Image from "next/image";
 
 ### First P5.js experiment: Draw some simple shapes
 
-[//]: # "todo describe setup react & p5"
+[//] # "todo describe setup react & p5"
 
 Since I haven't used p5.js before, I decided to start with the [exercise on drawing some simple shapes](https://digitalideation.github.io/gencg_f2301/notes/day01/#2-draw-then-code) with p5.js:
 

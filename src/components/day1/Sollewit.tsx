@@ -33,8 +33,8 @@ export const Sollewit: FC = () => {
       p5.point(point.x, point.y);
     });
 
-    p5.strokeWeight(0.5);
-    p5.stroke(200, 200, 200);
+    p5.strokeWeight(0.3);
+    p5.stroke(190, 190, 190);
     forEach(points.current, (point) => {
       forEach(points.current, (point2) => {
         if (point === point2) {
@@ -46,8 +46,8 @@ export const Sollewit: FC = () => {
     });
 
     points.current = map(points.current, (point) => ({
-      x: clamp(point.x + Math.random() * 5 - 2.5, 10, PAGE_CONTENT_WIDTH - 10),
-      y: clamp(point.y + Math.random() * 5 - 2.5, 10, 690),
+      x: clamp(point.x + Math.random() - 0.5, 10, PAGE_CONTENT_WIDTH - 10),
+      y: clamp(point.y + Math.random() - 0.5, 10, 690),
     }));
   }, []);
 
