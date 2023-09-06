@@ -8,11 +8,11 @@ import { easing } from "ts-easing";
 
 const CENTER = PAGE_CONTENT_WIDTH / 2;
 
-const INNER_TICK_NUMBER = 10;
-const INNER_TICK_SIZE = 10;
-const INNER_TICK_MARGIN = 5;
-
 export const ClockStep1: FC = () => {
+  const INNER_TICK_NUMBER = 10;
+  const INNER_TICK_SIZE = 10;
+  const INNER_TICK_MARGIN = 5;
+
   const setup = useCallback<SketchProps["setup"]>((p5, canvasParentRef) => {
     p5.createCanvas(PAGE_CONTENT_WIDTH, PAGE_CONTENT_WIDTH / 4).parent(
       canvasParentRef,
@@ -67,6 +67,10 @@ export const ClockStep1: FC = () => {
 };
 
 export const ClockStep2Interesting: FC = () => {
+  const INNER_TICK_NUMBER = 10;
+  const INNER_TICK_SIZE = 10;
+  const INNER_TICK_MARGIN = 5;
+
   const setup = useCallback<SketchProps["setup"]>((p5, canvasParentRef) => {
     p5.createCanvas(PAGE_CONTENT_WIDTH, PAGE_CONTENT_WIDTH / 4).parent(
       canvasParentRef,
@@ -138,6 +142,10 @@ export const ClockStep2Interesting: FC = () => {
 };
 
 export const ClockStep2: FC = () => {
+  const INNER_TICK_NUMBER = 10;
+  const INNER_TICK_SIZE = 10;
+  const INNER_TICK_MARGIN = 5;
+
   const setup = useCallback<SketchProps["setup"]>((p5, canvasParentRef) => {
     p5.createCanvas(PAGE_CONTENT_WIDTH, PAGE_CONTENT_WIDTH / 2).parent(
       canvasParentRef,
@@ -186,6 +194,69 @@ export const ClockStep2: FC = () => {
           easing.inOutQuart,
           p5,
         );
+      }
+
+      p5.point(CENTER + offsetX, CENTER / 2 + offsetY);
+    });
+  }, []);
+
+  return <ResponsiveSketch setup={setup} draw={draw} />;
+};
+
+export const ClockStep3: FC = () => {
+  const INNER_TICK_NUMBER = 30;
+  const INNER_TICK_SIZE = 5;
+  const INNER_TICK_MARGIN = 2;
+
+  const setup = useCallback<SketchProps["setup"]>((p5, canvasParentRef) => {
+    p5.createCanvas(PAGE_CONTENT_WIDTH, PAGE_CONTENT_WIDTH / 2).parent(
+      canvasParentRef,
+    );
+  }, []);
+
+  const circleRadius =
+    ((INNER_TICK_NUMBER + 1) / 4) * (INNER_TICK_SIZE + INNER_TICK_MARGIN);
+
+  const innerCircleTickAngle = (2 * Math.PI) / INNER_TICK_NUMBER;
+
+  const draw = useCallback<NonNullable<SketchProps["draw"]>>((p5) => {
+    p5.clear();
+    p5.stroke(255, 255, 255);
+    p5.strokeWeight(INNER_TICK_SIZE);
+    //p5.noFill();
+
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const millis = now.getMilliseconds();
+
+    const innerTicksPassed = seconds % INNER_TICK_NUMBER;
+
+    const reset = innerTicksPassed === 0 && millis <= 400;
+
+    forEach(range(0, INNER_TICK_NUMBER), (i) => {
+      let offsetX = 0;
+      let offsetY = 0;
+
+      if (innerTicksPassed >= i) {
+        const angle = innerCircleTickAngle * i;
+        offsetX = p5.cos(angle) * circleRadius;
+        offsetY = p5.sin(angle) * circleRadius;
+      } else {
+        offsetX =
+          (INNER_TICK_SIZE + INNER_TICK_MARGIN) * (innerTicksPassed - i) +
+          circleRadius;
+
+        offsetX += ease(
+          0,
+          INNER_TICK_SIZE + INNER_TICK_MARGIN,
+          millis / 1000,
+          easing.inOutQuart,
+          p5,
+        );
+      }
+
+      if (innerTicksPassed >= i) {
+      } else {
       }
 
       p5.point(CENTER + offsetX, CENTER / 2 + offsetY);
