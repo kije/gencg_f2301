@@ -346,17 +346,18 @@ export const GridsWithNextedBoxesRotating: FC<GridProps> = ({
           p5.resetMatrix();
           // remember: composing transformations is done by multiplying the matrices, thus operations need to be in reverse order
           p5.translate(x0, y0);
-          p5.translate(tileSizeWithMargin / 2, tileSizeWithMargin / 2);
+          p5.translate(tileSize / 2, tileSize / 2);
           p5.rotate(angle2);
           p5.rotate(angle);
-          p5.translate(tileSizeWithMargin / -2, tileSizeWithMargin / -2);
+          p5.translate(tileSize / -2, tileSize / -2);
 
           drawNestedBox(0, 0, tileSize, 3, p5, (box, level) => {
+            p5.strokeWeight(0.35 + 1 / (level + 2));
             p5.rotate(
-              level / 10 +
-                (clampBackwardsForwards(step.current, 80 * (1 / (f + 1))) /
+              level / 100 +
+                (clampBackwardsForwards(step.current, 80 * (1 / (f + 1.05))) /
                   80) *
-                  (1 / (f + 1)),
+                  (1 / (f + 1.05)),
             );
           });
         });
