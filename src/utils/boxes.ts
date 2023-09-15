@@ -1,11 +1,7 @@
+import { Point } from "@/utils/helpers";
 import { vec2 } from "gl-matrix";
 import { forEach, range } from "lodash";
 import P5 from "p5";
-
-export interface Point {
-  x: number;
-  y: number;
-}
 
 export type Box = [Point, Point, Point, Point];
 

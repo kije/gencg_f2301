@@ -1,11 +1,6 @@
 import { ResponsiveSketch } from "@/components/ResponsiveSketch";
-import {
-  Box,
-  drawNestedBox,
-  getNestedBox,
-  getOuterBox,
-  Point,
-} from "@/utils/boxes";
+import { Box, drawNestedBox, getNestedBox, getOuterBox } from "@/utils/boxes";
+import { Point } from "@/utils/helpers";
 import { forEach, range } from "lodash";
 import { useCallback } from "react";
 import { SketchProps } from "react-p5";

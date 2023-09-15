@@ -16,3 +16,8 @@ export function clampBackwardsForwards(value: number, max: number) {
 
   return value % max;
 }
+
+export interface Point {
+  x: number;
+  y: number;
+}

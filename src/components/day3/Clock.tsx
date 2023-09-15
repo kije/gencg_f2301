@@ -393,19 +393,6 @@ export const ClockAlternative: FC = memo(() => {
         PAGE_CONTENT_WIDTH / 4 - 20,
       );
 
-      p5.stroke(200, 200, 200);
-      p5.strokeWeight(1);
-
-      p5.line(
-        MINOR_SECOND_TICK_POSITION,
-        PAGE_CONTENT_WIDTH / 4 - 15,
-        MAJOR_SECOND_TICK_POSITION,
-        PAGE_CONTENT_WIDTH / 4 - 15,
-      );
-
-      p5.stroke(255, 255, 255);
-      p5.strokeWeight(2);
-
       p5.line(
         MINOR_MINUTE_TICK_POSITION,
         PAGE_CONTENT_WIDTH / 4 - 10,
@@ -420,19 +407,6 @@ export const ClockAlternative: FC = memo(() => {
         PAGE_CONTENT_WIDTH / 4 - 20,
       );
 
-      p5.stroke(200, 200, 200);
-      p5.strokeWeight(1);
-
-      p5.line(
-        MINOR_MINUTE_TICK_POSITION,
-        PAGE_CONTENT_WIDTH / 4 - 15,
-        MAJOR_MINUTE_TICK_POSITION,
-        PAGE_CONTENT_WIDTH / 4 - 15,
-      );
-
-      p5.stroke(255, 255, 255);
-      p5.strokeWeight(2);
-
       p5.line(
         MINOR_HOUR_TICK_POSITION,
         PAGE_CONTENT_WIDTH / 4 - 10,
@@ -446,19 +420,6 @@ export const ClockAlternative: FC = memo(() => {
         MAJOR_HOUR_TICK_POSITION,
         PAGE_CONTENT_WIDTH / 4 - 20,
       );
-
-      p5.stroke(200, 200, 200);
-      p5.strokeWeight(1);
-
-      p5.line(
-        MINOR_HOUR_TICK_POSITION,
-        PAGE_CONTENT_WIDTH / 4 - 15,
-        MAJOR_HOUR_TICK_POSITION,
-        PAGE_CONTENT_WIDTH / 4 - 15,
-      );
-
-      p5.stroke(255, 255, 255);
-      p5.strokeWeight(2);
 
       p5.strokeWeight(INNER_TICK_SIZE);
 
