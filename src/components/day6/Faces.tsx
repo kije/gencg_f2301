@@ -180,19 +180,23 @@ export const Faces2: FC = memo(() => {
         );
       });
 
-    // let meanDistance = meanBy(
-    //   zip(
-    //     faceLandmarkerResult?.faceLandmarks.flat(),
-    //     tail(faceLandmarkerResult?.faceLandmarks.flat()),
-    //   ),
-    //   (l1, l2) => {
-    //     const distance = Math.sqrt(
-    //       Math.pow(l1.x - l2.x, 2) + Math.pow(l1.y - l2.y, 2),
-    //     );
-    //
-    //     return distance;
-    //   },
-    // );
+    let meanDistance = meanBy(
+      zip(
+        faceLandmarkerResult?.faceLandmarks.flat(),
+        tail(faceLandmarkerResult?.faceLandmarks.flat()),
+      ),
+      ([l1, l2]) => {
+        if (!l1 || !l2) {
+          return 0;
+        }
+
+        const distance = Math.sqrt(
+          Math.pow(l1.x - l2.x, 2) + Math.pow(l1.y - l2.y, 2),
+        );
+
+        return distance;
+      },
+    );
 
     faceLandmarkerResult?.faceLandmarks.flat().map((landmark) => {
       let angle2 = p5.map(p5.frameCount % 60, 0, 60, 0, p5.TWO_PI);
@@ -206,7 +210,7 @@ export const Faces2: FC = memo(() => {
       );
       p5.rotate(angle2);
 
-      drawNestedBox(0, 0, 7, 3, p5);
+      drawNestedBox(0, 0, 10 * (meanDistance * 10), 3, p5);
     });
   }, []);
 
