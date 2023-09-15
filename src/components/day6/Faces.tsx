@@ -21,7 +21,7 @@ const MEDIAPIPE_FACE_CONFIG = {
 
 async function createDetector() {
   if (typeof window === "undefined") {
-    return;
+    return null;
   }
 
   console.log(modelAsset);
